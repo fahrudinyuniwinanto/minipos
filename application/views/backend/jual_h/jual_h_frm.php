@@ -36,7 +36,7 @@
             <button type="button" class="btn btn-sm btn-warning" ng-click="prin()" ng-if="f.crud=='u'">Cetak</button>
             <button type="button" class="btn btn-sm btn-danger" ng-click="del()" ng-if="f.crud=='u'">Hapus</button>
         </div>
-        <h3>Form Penjualan</h3>
+        <h3>Kasir</h3>
     </div>
     <div class="ibox-content frmEntry">
         <div class="row">
@@ -45,10 +45,10 @@
                 <input type="text" ng-model="h.id" class="form-control input-sm" readonly>
                 <label title="customer">Customer</label>
                 <input type="text" ng-model="h.customer" class="form-control input-sm">
-                
+
             </div>
             <div class="col-sm-3">
-            <label title="tanggal">Tanggal</label>
+                <label title="tanggal">Tanggal</label>
                 <input type="text" ng-model="h.tanggal" class="form-control input-sm date">
                 <label title="cara_bayar">Cara Bayar</label>
                 <select ng-model="h.cara_bayar" class="form-control input-sm">
@@ -66,125 +66,167 @@
                 <input type="text" ng-model="h.jumlah_kembali" class="form-control input-lg" readonly>
             </div>
         </div>
-    </div>
-</div>
-<script>
-    app.controller('mainCtrl', ['$scope', '$http', 'NgTableParams', 'SfService', 'FileUploader', function($scope, $http, NgTableParams, SfService, FileUploader) {
-        SfService.setUrl("<?= base_url() ?>jual_h");
-        $scope.f = {
-            crud: 'c',
-            tab: 'list',
-            pk: 'id'
-        };
-        $scope.h = {};
+        <div class="row">
+            <div class="col-md-12">
+                <div class="table-responsive">
+                    <h4>List Barang </h4>
+                    <table class="table" style="white-space: nowrap;">
+                        <tr>
+                            <th>Nama Barang</th>
+                            <th>Qty</th>
+                            <th>Satuan</th>
+                            <th>Harga Satuan</th>
+                            <th>Total</th>
+                        </tr>
+                        <tr ng-repeat="(k,v) in d|filter:f.q_d" ng-class="{'terhapus':v.isactive==0}">
+                            <td class="pointer" ng-click="lookup('d_barang',k)">
+                                <div class="" title="ID: {{v.id_barang}}"><span class="text-success"><i class="fa fa-search"></i></span>{{v.nm_barang}}</div>
+                            </td>
+                            <td class="p-0"><input type="text" ng-model="v.qty" class="form-control input-sm no-border-text" placeholder="..."></td>
+                            <td class="p-0"><input type="text" ng-model="v.satuan" class="form-control input-sm no-border-text" readonly></td>
+                            <td class="p-0"><input type="text" ng-model="v.harga" class="form-control input-sm no-border-text" readonly></td>
+                            <td class="p-0"><input type="text" ng-model="v.total" class="form-control input-sm no-border-text" readonly></td>
+                        </tr>
+                    </table>
+                </div>
+                <button type="button" class="btn btn-success btn-sm" ng-click="addD()" ng-class="f.level_user==3?'hide':''">Tambah Baris</button>
+                <hr>
+            </div>
+            <script>
+                app.controller('mainCtrl', ['$scope', '$http', 'NgTableParams', 'SfService', 'FileUploader', function($scope, $http, NgTableParams, SfService, FileUploader) {
+                    SfService.setUrl("<?= base_url() ?>jual_h");
+                    $scope.f = {
+                        crud: 'c',
+                        tab: 'list',
+                        pk: 'id'
+                    };
+                    $scope.h = {};
+                    $scope.d = [];
 
-        $scope.new = function() {
-            $scope.f.tab = 'frm';
-            $scope.f.crud = 'c';
-            $scope.h = {
-                tanggal: moment().format('YYYY/MM/DD')
-            };
-        }
+                    $scope.new = function() {
+                        $scope.f.tab = 'frm';
+                        $scope.f.crud = 'c';
+                        $scope.h = {
+                            tanggal: moment().format('YYYY/MM/DD')
+                        };
+                        $scope.d = [];
+                    }
 
-        $scope.copy = function() {
-            $scope.f.crud = 'c';
-            $scope.h[$scope.f.pk] = '';
-        }
+                    $scope.copy = function() {
+                        $scope.f.crud = 'c';
+                        $scope.h[$scope.f.pk] = '';
+                    }
 
-        $scope.getList = function() {
-            $scope.tableList = new NgTableParams({}, {
-                getData: function($defer, params) {
-                    var $btn = $('button').button('loading');
-                    return $http.get(SfService.getUrl('/getList'), {
-                        params: {
-                            page: $scope.tableList.page(),
-                            limit: $scope.tableList.count(),
-                            order_by: $scope.tableList.orderBy(),
-                            q: $scope.f.q
+                    $scope.addD = function() {
+                        $scope.d.push([]);
+                    }
+
+                    $scope.delD = function(k) {
+                        $scope.d[k].splice();
+                    }
+
+
+                    $scope.getList = function() {
+                        $scope.tableList = new NgTableParams({}, {
+                            getData: function($defer, params) {
+                                var $btn = $('button').button('loading');
+                                return $http.get(SfService.getUrl('/getList'), {
+                                    params: {
+                                        page: $scope.tableList.page(),
+                                        limit: $scope.tableList.count(),
+                                        order_by: $scope.tableList.orderBy(),
+                                        q: $scope.f.q
+                                    }
+                                }).then(function(jdata) {
+                                    $btn.button('reset');
+                                    $scope.tableList.total(jdata.data.total);
+                                    return jdata.data.data;
+                                }, function(error) {
+                                    $btn.button('reset');
+                                    swal('', error.data, 'error');
+                                });
+
+                            }
+                        });
+                    }
+
+                    $scope.save = function() {
+                        if (SfFormValidate('.frmEntry') == false) {
+                            swal('', 'Data not valid', 'error');
+                            return false;
                         }
-                    }).then(function(jdata) {
-                        $btn.button('reset');
-                        $scope.tableList.total(jdata.data.total);
-                        return jdata.data.data;
-                    }, function(error) {
-                        $btn.button('reset');
-                        swal('', error.data, 'error');
-                    });
 
-                }
-            });
-        }
+                        SfService.post(SfService.getUrl('/save'), {
+                            f: $scope.f,
+                            h: $scope.h,
+                            d: $scope.d,
+                        }, function(jdata) {
+                            console.log(jdata);
+                            $scope.f.tab = 'list';
+                            $scope.getList();
+                        });
+                    }
 
-        $scope.save = function() {
-            if (SfFormValidate('.frmEntry') == false) {
-                swal('', 'Data not valid', 'error');
-                return false;
-            }
+                    $scope.read = function(id) {
+                        SfService.get(SfService.getUrl("/read/" + id), {}, function(jdata) {
+                            $scope.f.tab = 'frm';
+                            $scope.f.crud = 'u';
+                            $scope.h = jdata.data.h;
+                            $scope.d = jdata.data.d;
+                        });
+                    }
 
-            SfService.post(SfService.getUrl('/save'), {
-                f: $scope.f,
-                h: $scope.h
-            }, function(jdata) {
-                console.log(jdata);
-                $scope.f.tab = 'list';
-                $scope.getList();
-            });
-        }
+                    $scope.del = function(id) {
+                        if (id == undefined) {
+                            var id = $scope.h[$scope.f.pk];
+                        }
 
-        $scope.read = function(id) {
-            SfService.get(SfService.getUrl("/read/" + id), {}, function(jdata) {
-                $scope.f.tab = 'frm';
-                $scope.f.crud = 'u';
-                $scope.h = jdata.data.h;
-            });
-        }
+                        swal({
+                                title: "Perhatian",
+                                text: "Hapus data ini? id=" + id,
+                                type: "warning",
+                                showCancelButton: true,
+                                confirmButtonClass: "btn-danger",
+                                confirmButtonText: "Ya, Hapus!",
+                                closeOnConfirm: false
+                            },
+                            function() {
+                                SfService.get(SfService.getUrl("/delete/" + id), {}, function(jdata) {
+                                    $scope.f.tab = 'list';
+                                    $scope.getList();
+                                    swal("Berhasil!", "Data berhasil dihapus.", "success");
+                                });
+                            });
+                    }
 
-        $scope.del = function(id) {
-            if (id == undefined) {
-                var id = $scope.h[$scope.f.pk];
-            }
+                    $scope.prin = function(id) {
+                        if (id == undefined) {
+                            var id = $scope.h[$scope.f.pk];
+                        }
+                        window.open(SfService.getUrl('/prin') + "?id=" + encodeURI(id), 'print_' + id, 'width=950,toolbar=0,resizable=0,scrollbars=yes,height=520,top=100,left=100').focus();
+                    }
 
-            swal({
-                    title: "Perhatian",
-                    text: "Hapus data ini? id=" + id,
-                    type: "warning",
-                    showCancelButton: true,
-                    confirmButtonClass: "btn-danger",
-                    confirmButtonText: "Ya, Hapus!",
-                    closeOnConfirm: false
-                },
-                function() {
-                    SfService.get(SfService.getUrl("/delete/" + id), {}, function(jdata) {
-                        $scope.f.tab = 'list';
-                        $scope.getList();
-                        swal("Berhasil!", "Data berhasil dihapus.", "success");
-                    });
-                });
-        }
+                    $scope.lookup = function(icase, fn) {
+                        switch (icase) {
+                            case 'd_barang':
+                                SfLookup("<?= base_url() ?>m_barang/lookup",
+                                    function(id, name, json) {
+                                        $scope.d[fn].id_barang = json.id;
+                                        $scope.d[fn].nm_barang = json.nama;
+                                        $scope.d[fn].harga = json.harga_jual;
+                                        $scope.d[fn].satuan = json.satuan;
+                                        $scope.d[fn].qty = 1;
+                                        $scope.d[fn].total = json.harga_jual*1;
+                                        $scope.$apply();
+                                    });
+                                break;
+                            default:
+                                swal('Pilihan tidak tersedia');
+                                break;
+                        }
+                    }
 
-        $scope.prin = function(id) {
-            if (id == undefined) {
-                var id = $scope.h[$scope.f.pk];
-            }
-            window.open(SfService.getUrl('/prin') + "?id=" + encodeURI(id), 'print_' + id, 'width=950,toolbar=0,resizable=0,scrollbars=yes,height=520,top=100,left=100').focus();
-        }
+                    $scope.getList();
 
-        $scope.lookup = function(icase, fn) {
-            switch (icase) {
-                // case 'id_mustahik':
-                //     SfLookup("<?= base_url() ?>master_mustahik/lookup", function(id,name,json) {
-                //         $scope.h.id_mustahik=id;
-                //         $scope.h.nm_mustahik=name;
-                //         $scope.$apply();
-                //     });
-                //     break;
-                default:
-                    swal('Pilihan tidak tersedia');
-                    break;
-            }
-        }
-
-        $scope.getList();
-
-    }]);
-</script>
+                }]);
+            </script>

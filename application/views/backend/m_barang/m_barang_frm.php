@@ -22,6 +22,7 @@
                     <td title="'Harga Jual'" filter="{harga_jual: 'text'}" sortable="'harga_jual'">{{v.harga_jual}}</td>
                     <td title="'Harga Beli'" filter="{harga_beli: 'text'}" sortable="'harga_beli'">{{v.harga_beli}}</td>
                     <td title="'Satuan'" filter="{satuan: 'text'}" sortable="'satuan'">{{v.satuan}}</td>
+                    <td title="'Penginput'" filter="{created_by: 'text'}" sortable="'created_by'">{{v.created_by}}</td>
                 </tr>
             </table>
         </div>
@@ -71,6 +72,9 @@
                 <select ng-model="h.satuan" class="form-control input-sm">
                     <option ng-repeat="v in ['PCS','DUS']" ng-value="v">{{v}}</option>
                 </select>
+                <label title="nama">Penginput</label>
+                <input type="text" ng-model="h.created_by" class="form-control input-sm text-uppercase">
+                
             </div>
         </div>
     </div>

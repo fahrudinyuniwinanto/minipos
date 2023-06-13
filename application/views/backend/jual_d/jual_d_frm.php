@@ -16,15 +16,15 @@
             <table ng-table="tableList" show-filter="false" class="table table-condensed table-bordered table-hover" style="white-space: nowrap;">
                 <tr ng-repeat="(k,v) in $data" class="pointer" ng-click="read(v.id)">
                     <td title="'No'">{{k+1}}</td>
-                                                                        <td title="'Id'" filter="{id: 'text'}" sortable="'id'">{{v.id}}</td>
-                                                                                                <td title="'Id Penjualan'" filter="{id_penjualan: 'text'}" sortable="'id_penjualan'">{{v.id_penjualan}}</td>
-                                                                                                <td title="'Id Barang'" filter="{id_barang: 'text'}" sortable="'id_barang'">{{v.id_barang}}</td>
-                                                                                                <td title="'Harga'" filter="{harga: 'text'}" sortable="'harga'">{{v.harga}}</td>
-                                                                                                <td title="'Qty'" filter="{qty: 'text'}" sortable="'qty'">{{v.qty}}</td>
-                                                                                                <td title="'Total'" filter="{total: 'text'}" sortable="'total'">{{v.total}}</td>
-                                                                                                <td title="'Created At'" filter="{created_at: 'text'}" sortable="'created_at'">{{v.created_at}}</td>
-                                                                                                <td title="'Created By'" filter="{created_by: 'text'}" sortable="'created_by'">{{v.created_by}}</td>
-                                                            </tr>
+                    <td title="'Id'" filter="{id: 'text'}" sortable="'id'">{{v.id}}</td>
+                    <td title="'Id Penjualan'" filter="{id_penjualan: 'text'}" sortable="'id_penjualan'">{{v.id_penjualan}}</td>
+                    <td title="'Id Barang'" filter="{id_barang: 'text'}" sortable="'id_barang'">{{v.id_barang}}</td>
+                    <td title="'Harga'" filter="{harga: 'text'}" sortable="'harga'">{{v.harga}}</td>
+                    <td title="'Qty'" filter="{qty: 'text'}" sortable="'qty'">{{v.qty}}</td>
+                    <td title="'Total'" filter="{total: 'text'}" sortable="'total'">{{v.total}}</td>
+                    <td title="'Created At'" filter="{created_at: 'text'}" sortable="'created_at'">{{v.created_at}}</td>
+                    <td title="'Created By'" filter="{created_by: 'text'}" sortable="'created_by'">{{v.created_by}}</td>
+                </tr>
             </table>
         </div>
     </div>
@@ -43,29 +43,29 @@
     <div class="ibox-content frmEntry">
         <div class="row">
             <div class="col-sm-4">
-                                                            <label title="id">Id</label>
-                                                                <input type="text" ng-model="h.id" class="form-control input-sm">
-                                                                                <label title="id_penjualan">Id Penjualan</label>
-                                                                <input type="text" ng-model="h.id_penjualan" class="form-control input-sm">
-                                                                                <label title="id_barang">Id Barang</label>
-                                                                <input type="text" ng-model="h.id_barang" class="form-control input-sm">
-                                                                                <label title="harga">Harga</label>
-                                                                <input type="text" ng-model="h.harga" class="form-control input-sm">
-                                                                                <label title="qty">Qty</label>
-                                                                <input type="text" ng-model="h.qty" class="form-control input-sm">
-                                                                                <label title="total">Total</label>
-                                                                <input type="text" ng-model="h.total" class="form-control input-sm">
-                                                                                <label title="created_at">Created At</label>
-                                                                <input type="text" ng-model="h.created_at" class="form-control input-sm">
-                                                                                <label title="created_by">Created By</label>
-                                                                <input type="text" ng-model="h.created_by" class="form-control input-sm">
-                                                </div>
+                <label title="id">Id</label>
+                <input type="text" ng-model="h.id" class="form-control input-sm">
+                <label title="id_penjualan">Id Penjualan</label>
+                <input type="text" ng-model="h.id_penjualan" class="form-control input-sm">
+                <label title="id_barang">Id Barang</label>
+                <input type="text" ng-model="h.id_barang" class="form-control input-sm">
+                <label title="harga">Harga</label>
+                <input type="text" ng-model="h.harga" class="form-control input-sm">
+                <label title="qty">Qty</label>
+                <input type="text" ng-model="h.qty" class="form-control input-sm">
+                <label title="total">Total</label>
+                <input type="text" ng-model="h.total" class="form-control input-sm">
+                <label title="created_at">Created At</label>
+                <input type="text" ng-model="h.created_at" class="form-control input-sm">
+                <label title="created_by">Created By</label>
+                <input type="text" ng-model="h.created_by" class="form-control input-sm">
+            </div>
         </div>
     </div>
 </div>
 <script>
     app.controller('mainCtrl', ['$scope', '$http', 'NgTableParams', 'SfService', 'FileUploader', function($scope, $http, NgTableParams, SfService, FileUploader) {
-        SfService.setUrl("<?=base_url()?>jual_d");
+        SfService.setUrl("<?= base_url() ?>jual_d");
         $scope.f = {
             crud: 'c',
             tab: 'list',
@@ -167,7 +167,7 @@
         $scope.lookup = function(icase, fn) {
             switch (icase) {
                 // case 'id_mustahik':
-                //     SfLookup("<?=base_url()?>master_mustahik/lookup", function(id,name,json) {
+                //     SfLookup("<?= base_url() ?>master_mustahik/lookup", function(id,name,json) {
                 //         $scope.h.id_mustahik=id;
                 //         $scope.h.nm_mustahik=name;
                 //         $scope.$apply();
