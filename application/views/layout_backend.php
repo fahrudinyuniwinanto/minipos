@@ -171,12 +171,11 @@ lookup();
                     </li>
                     </li>
 
-                    <li class="<?= is_allow('M_LAP_JUAL') ? '' : 'hide' ?>">
+                    <li class="<?= is_allow('M_LAPORAN') ? '' : 'hide' ?>">
                         <a href="#"><i class="fa fa-pie-chart"></i> <span class="nav-label">Laporan</span>
                             <span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li><a href="<?= base_url() ?>laporan/laporanPenjualanDetil">Penjualan</a></li>
-
                     </li>
                 </ul>
                 </li>

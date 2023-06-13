@@ -3,23 +3,6 @@
 <h3>Laporan Detil Penjualan</h3>
 <hr>
 <div class="">
-    <div class="col-md-3">
-        <label>Cabang</label>
-        <select ng-model="cabang" class="form-control input-sm">
-            <option ng-repeat="v in [['WR001','Temanggung'],['WR002','Tembarak']]" ng-value="v[0]">{{v[1]}}</option>
-        </select>
-    </div>
-
-    <br style="clear: both;">
-    <div class="col-md-3">
-        <label>Pilihan Periode</label>
-        <select class="form-control input-sm" id="pilihan" ng-model="pilihan">
-            <!-- <option value="">Pilih</option> -->
-            <option value="tanggal">Berdasarkan Tanggal</option>
-            <option value="bulan">Berdasarkan Bulan</option>
-            <option value="tahun">Berdasarkan Tahun</option>
-        </select>
-    </div>
     <div id="pil-tanggal">
         <div class="col-md-3">
             <label>Dari Tanggal</label>
@@ -83,7 +66,6 @@
 </div>
 <script>
 $(document).ready(function() {
-    $("#pil-tanggal").hide();
     $("#pil-bulan").hide();
     $("#pil-tahun").hide();
 
@@ -124,19 +106,10 @@ app.controller('mainCtrl', ['$scope', '$http', 'NgTableParams', 'SfService', 'Fi
             swal("", "Range tanggal harus dalam tahun yang sama!", "error");
             return false;
         }
-        if (typeof $scope.cabang == 'undefined') {
-            swal("", "Pilih Cabang dulu!", "error");
-            return false;
-        }
-        if (typeof $scope.pilihan == 'undefined') {
-            swal("", "Pilih Periode dulu!", "error");
-            return false;
-        }
+      
 
         window.open(SfService.getUrl("/prinPenjualanDetil?date1=" + $scope.date1 + "&date2=" + $scope
-            .date2 +
-            "&bulan=" + $scope.bulan + "&tahun=" + $scope.tahun + "&pilihan=" + $scope.pilihan +
-            "&cabang=" + $scope.cabang));
+            .date2));
     }
 
 
