@@ -5,7 +5,7 @@
         <div class="pull-right form-inline">
             <button type="button" class="btn btn-sm btn-primary" ng-click="new()">Buat Baru</button>
         </div>
-        <h3>Daftar So_d</h3>
+        <h3>Daftar Vendor</h3>
     </div>
     <div class="ibox-content form-inline">
         <div class="input-group m-b">
@@ -16,14 +16,10 @@
             <table ng-table="tableList" show-filter="false" class="table table-condensed table-bordered table-hover" style="white-space: nowrap;">
                 <tr ng-repeat="(k,v) in $data" class="pointer" ng-click="read(v.id)">
                     <td title="'No'">{{k+1}}</td>
-                                                                        <td title="'Id'" filter="{id: 'text'}" sortable="'id'">{{v.id}}</td>
-                                                                                                <td title="'Id Stock Opname'" filter="{id_so: 'text'}" sortable="'id_so'">{{v.id_so}}</td>
-                                                                                                <td title="'Cabang'" filter="{id_cabang: 'text'}" sortable="'id_cabang'">{{v.id_cabang}}</td>
-                                                                                                <td title="'Qty Stock'" filter="{qty_stock: 'text'}" sortable="'qty_stock'">{{v.qty_stock}}</td>
-                                                                                                <td title="'Qty Fisik'" filter="{qty_fisik: 'text'}" sortable="'qty_fisik'">{{v.qty_fisik}}</td>
-                                                                                                <td title="'Qty Selisih'" filter="{qty_selisih: 'text'}" sortable="'qty_selisih'">{{v.qty_selisih}}</td>
-                                                                                                <td title="'Harga'" filter="{harga: 'text'}" sortable="'harga'">{{v.harga}}</td>
-                                                                                                                                                                                                                                                                                        </tr>
+                    <td title="'Nama Vendor'" filter="{nama: 'text'}" sortable="'nama'">{{v.nama}}</td>
+                    <td title="'Alamat'" filter="{alamat: 'text'}" sortable="'alamat'">{{v.alamat}}</td>
+                    <td title="'No. HP/WA'" filter="{telp: 'text'}" sortable="'telp'">{{v.telp}}</td>
+                </tr>
             </table>
         </div>
     </div>
@@ -37,38 +33,26 @@
             <button type="button" class="btn btn-sm btn-warning" ng-click="prin()" ng-if="f.crud=='u'">Cetak</button>
             <button type="button" class="btn btn-sm btn-danger" ng-click="del()" ng-if="f.crud=='u'">Hapus</button>
         </div>
-        <h3>Form So_d</h3>
+        <h3>Form M_vendor</h3>
     </div>
     <div class="ibox-content frmEntry">
         <div class="row">
             <div class="col-sm-4">
-                                                            <label title="id">ID</label>
-                                                                <input type="text" ng-model="h.id" class="form-control input-sm">
-                                                                                <label title="id_so">ID Stock Opname</label>
-                                                                <div class="input-group">
-                            <input type="text" ng-model="h.id_so" class="form-control input-sm" placeholder="" readonly>
-                            <span class="input-group-addon pointer" ng-click="lookup('h_id_so')">Cari</span>
-                        </div>
-                                                                                <label title="id_cabang">Cabang</label>
-                                                                <div class="input-group">
-                            <input type="text" ng-model="h.id_cabang" class="form-control input-sm" placeholder="" readonly>
-                            <span class="input-group-addon pointer" ng-click="lookup('h_id_cabang')">Cari</span>
-                        </div>
-                                                                                <label title="qty_stock">Qty Stock</label>
-                                                                <input type="text" ng-model="h.qty_stock" class="form-control input-sm">
-                                                                                <label title="qty_fisik">Qty Fisik</label>
-                                                                <input type="text" ng-model="h.qty_fisik" class="form-control input-sm">
-                                                                                <label title="qty_selisih">Qty Selisih</label>
-                                                                <input type="text" ng-model="h.qty_selisih" class="form-control input-sm">
-                                                                                <label title="harga">Harga</label>
-                                                                <input type="text" ng-model="h.harga" class="form-control input-sm">
-                                                                                                                                                                                                                                                                                                                                                                                                                                            </div>
+                <label title="id">ID</label>
+                <input type="text" ng-model="h.id" class="form-control input-sm" readonly>
+                <label title="nama">Nama Vendor</label>
+                <input type="text" ng-model="h.nama" class="form-control input-sm">
+                <label title="alamat">Alamat</label>
+                <input type="text" ng-model="h.alamat" class="form-control input-sm">
+                <label title="telp">HP/WA</label>
+                <input type="text" ng-model="h.telp" class="form-control input-sm numeric">
+            </div>
         </div>
     </div>
 </div>
 <script>
     app.controller('mainCtrl', ['$scope', '$http', 'NgTableParams', 'SfService', 'FileUploader', function($scope, $http, NgTableParams, SfService, FileUploader) {
-        SfService.setUrl("<?=base_url()?>so_d");
+        SfService.setUrl("<?= base_url() ?>m_vendor");
         $scope.f = {
             crud: 'c',
             tab: 'list',
@@ -170,7 +154,7 @@
         $scope.lookup = function(icase, fn) {
             switch (icase) {
                 // case 'id_mustahik':
-                //     SfLookup("<?=base_url()?>master_mustahik/lookup", function(id,name,json) {
+                //     SfLookup("<?= base_url() ?>master_mustahik/lookup", function(id,name,json) {
                 //         $scope.h.id_mustahik=id;
                 //         $scope.h.nm_mustahik=name;
                 //         $scope.$apply();

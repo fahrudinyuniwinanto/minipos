@@ -79,15 +79,6 @@
                                     placeholder="Password" />
                             </div>
                             <div class="form-group m-b-15">
-                            Pilih Shift</div>
-                            <div class="form-group m-b-15">
-                                <select name="shift" class="form-control input-lg" required>
-                                    <option value="">>> Pilih Shift</option>
-                                    <option value="PAGI" <?=date('H')>=7&&date('H')<14?'selected':''?>>PAGI</option>
-                                    <option value="SIANG" <?=date('H')>=14&&date('H')<=21?'selected':''?>>SIANG</option>
-                                </select>
-                            </div>
-                            <div class="form-group m-b-15">
                                 <?php $cpt = generateCode(); ?>
                                 <?="Berapa ".$cpt['text'];?>
                             </div>

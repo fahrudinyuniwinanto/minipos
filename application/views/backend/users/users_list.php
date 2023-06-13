@@ -51,10 +51,7 @@
 		<th class="text-center">Fullname</th>
 		<th class="text-center">Username</th>
 		<th class="text-center">Email</th>
-		<th class="text-center">Grup</th>
-		<th class="text-center">Foto</th>
 		<th class="text-center">Telp</th>
-		<th class="text-center">Note</th>
 		<th class="text-center">Action</th>
             </tr>
             </thead>
@@ -67,10 +64,7 @@
 			<td><?php echo $users->fullname ?></td>
 			<td><?php echo $users->username ?></td>
 			<td><?php echo $users->email ?></td>
-			<td><?php echo $users->id_group ?></td>
-			<td><?php echo $users->foto ?></td>
 			<td><?php echo $users->telp ?></td>
-			<td><?php echo $users->note ?></td>
 			<td style="text-align:center" width="200px">
 				<?php 
 				echo anchor(site_url('users/read/'.$users->id_user),'Read','class="text-navy"'); 

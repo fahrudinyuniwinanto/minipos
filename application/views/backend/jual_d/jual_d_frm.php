@@ -18,18 +18,13 @@
                     <td title="'No'">{{k+1}}</td>
                                                                         <td title="'Id'" filter="{id: 'text'}" sortable="'id'">{{v.id}}</td>
                                                                                                 <td title="'Id Penjualan'" filter="{id_penjualan: 'text'}" sortable="'id_penjualan'">{{v.id_penjualan}}</td>
-                                                                                                <td title="'Barang'" filter="{id_barang: 'text'}" sortable="'id_barang'">{{v.id_barang}}</td>
-                                                                                                <td title="'Qty Entry'" filter="{qty_entry: 'text'}" sortable="'qty_entry'">{{v.qty_entry}}</td>
-                                                                                                <td title="'Satuan Entry'" filter="{satuan_entry: 'text'}" sortable="'satuan_entry'">{{v.satuan_entry}}</td>
-                                                                                                <td title="'Harga Satuan'" filter="{harga_satuan: 'text'}" sortable="'harga_satuan'">{{v.harga_satuan}}</td>
+                                                                                                <td title="'Id Barang'" filter="{id_barang: 'text'}" sortable="'id_barang'">{{v.id_barang}}</td>
                                                                                                 <td title="'Harga'" filter="{harga: 'text'}" sortable="'harga'">{{v.harga}}</td>
                                                                                                 <td title="'Qty'" filter="{qty: 'text'}" sortable="'qty'">{{v.qty}}</td>
-                                                                                                <td title="'Diskon Persen'" filter="{diskon_persen: 'text'}" sortable="'diskon_persen'">{{v.diskon_persen}}</td>
-                                                                                                <td title="'Diskon Rp'" filter="{diskon_rp: 'text'}" sortable="'diskon_rp'">{{v.diskon_rp}}</td>
-                                                                                                <td title="'Ppn Persen'" filter="{ppn_persen: 'text'}" sortable="'ppn_persen'">{{v.ppn_persen}}</td>
-                                                                                                <td title="'Ppn Rp'" filter="{ppn_rp: 'text'}" sortable="'ppn_rp'">{{v.ppn_rp}}</td>
-                                                                                                <td title="'Hpp'" filter="{hpp: 'text'}" sortable="'hpp'">{{v.hpp}}</td>
-                                                                                                                                                                                                                                                                                        </tr>
+                                                                                                <td title="'Total'" filter="{total: 'text'}" sortable="'total'">{{v.total}}</td>
+                                                                                                <td title="'Created At'" filter="{created_at: 'text'}" sortable="'created_at'">{{v.created_at}}</td>
+                                                                                                <td title="'Created By'" filter="{created_by: 'text'}" sortable="'created_by'">{{v.created_by}}</td>
+                                                            </tr>
             </table>
         </div>
     </div>
@@ -48,33 +43,23 @@
     <div class="ibox-content frmEntry">
         <div class="row">
             <div class="col-sm-4">
-                                                            <label title="id">ID</label>
+                                                            <label title="id">Id</label>
                                                                 <input type="text" ng-model="h.id" class="form-control input-sm">
-                                                                                <label title="id_penjualan">ID Penjualan</label>
+                                                                                <label title="id_penjualan">Id Penjualan</label>
                                                                 <input type="text" ng-model="h.id_penjualan" class="form-control input-sm">
-                                                                                <label title="id_barang">Barang</label>
+                                                                                <label title="id_barang">Id Barang</label>
                                                                 <input type="text" ng-model="h.id_barang" class="form-control input-sm">
-                                                                                <label title="qty_entry">Qty Entry</label>
-                                                                <input type="text" ng-model="h.qty_entry" class="form-control input-sm">
-                                                                                <label title="satuan_entry">Satuan Entry</label>
-                                                                <input type="text" ng-model="h.satuan_entry" class="form-control input-sm">
-                                                                                <label title="harga_satuan">Harga Satuan</label>
-                                                                <input type="text" ng-model="h.harga_satuan" class="form-control input-sm">
                                                                                 <label title="harga">Harga</label>
                                                                 <input type="text" ng-model="h.harga" class="form-control input-sm">
                                                                                 <label title="qty">Qty</label>
                                                                 <input type="text" ng-model="h.qty" class="form-control input-sm">
-                                                                                <label title="diskon_persen">Diskon Persen</label>
-                                                                <input type="text" ng-model="h.diskon_persen" class="form-control input-sm">
-                                                                                <label title="diskon_rp">Diskon Rp</label>
-                                                                <input type="text" ng-model="h.diskon_rp" class="form-control input-sm">
-                                                                                <label title="ppn_persen">PPN Persen</label>
-                                                                <input type="text" ng-model="h.ppn_persen" class="form-control input-sm">
-                                                                                <label title="ppn_rp">PPN Rp</label>
-                                                                <input type="text" ng-model="h.ppn_rp" class="form-control input-sm">
-                                                                                <label title="hpp">HPP</label>
-                                                                <input type="text" ng-model="h.hpp" class="form-control input-sm">
-                                                                                                                                                                                                                                                                                                                                                                                                                                            </div>
+                                                                                <label title="total">Total</label>
+                                                                <input type="text" ng-model="h.total" class="form-control input-sm">
+                                                                                <label title="created_at">Created At</label>
+                                                                <input type="text" ng-model="h.created_at" class="form-control input-sm">
+                                                                                <label title="created_by">Created By</label>
+                                                                <input type="text" ng-model="h.created_by" class="form-control input-sm">
+                                                </div>
         </div>
     </div>
 </div>

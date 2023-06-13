@@ -4,21 +4,21 @@ if (!defined('BASEPATH')) {
     exit('No direct script access allowed');
 }
 
-class M_group_d2 extends CI_Controller
+class M_vendor extends CI_Controller
 {
     private $m;
     function __construct()
     {
         parent::__construct();
         is_logged();
-        $this->load->model('M_group_d2_model');
-        $this->m = new M_group_d2_model();
+        $this->load->model('M_vendor_model');
+        $this->m = new M_vendor_model();
     }
 
     public function index()
     {
         $data = array(
-            'content' => "backend/m_group_d2/m_group_d2_frm",
+            'content' => "backend/m_vendor/m_vendor_frm",
         );
         $this->load->view(layout(), $data);
     }
@@ -32,7 +32,7 @@ class M_group_d2 extends CI_Controller
         $limit = $this->input->get('limit');
         $limit = @$limit == 0 ? 10 : $limit;
 
-        $this->queryList($total, $current, $page, $limit, $q, ['isactive' => 1]);
+        $this->queryList($total, $current, $page, $limit, $q, [1 => 1]);
 
         $data = $current->result_array();
         header('Content-Type: application/json');
@@ -63,11 +63,10 @@ class M_group_d2 extends CI_Controller
         $limit = $this->input->get('limit');
         $limit = @$limit == 0 ? 10 : $limit;
 
-        $total = $this->db
-            ->from($this->m->table)
+        $total = $this->db->from($this->m->table)
             ->like('id', $q)
             ->count_all_results();
-        $current = $this->db->select("id,nama")->from($this->m->table)
+        $current = $this->db->from($this->m->table)
             ->like('id', $q)
             ->limit($limit, $start)->get();
         $data = $current->result_array();
@@ -84,15 +83,14 @@ class M_group_d2 extends CI_Controller
         foreach ($this->m->getFields() as $k => $v) {
             $arr[$v] = @$h->$v;
         }
-        $arr['isactive'] = 1;
+        // $arr['isactive'] = 1;
         if ($f->crud == 'c') {
-            $arr['id'] = str_replace("/", "", $h->id);
             $arr['created_at'] = date("Y-m-d H:i:s");
             $arr['created_by'] = $this->session->userdata('username');
             $this->db->insert($this->m->table, $arr);
         } else {
-            $arr['updated_at'] = date("Y-m-d H:i:s");
-            $arr['updated_by'] = $this->session->userdata('username');
+            // $arr['updated_at'] = date("Y-m-d H:i:s");
+            // $arr['updated_by'] = $this->session->userdata('username');
             $this->db->replace($this->m->table, $arr);
         }
         header('Content-Type: application/json');
@@ -111,7 +109,7 @@ class M_group_d2 extends CI_Controller
     public function delete($id)
     {
         $this->db->where($this->m->id, $id);
-        $this->db->update($this->m->table, ['isactive' => 0]);
+        $this->db->update($this->m->table, [0=> 0]);
         header('Content-Type: application/json');
         echo json_encode('Hapus data berhasil');
     }
@@ -123,7 +121,7 @@ class M_group_d2 extends CI_Controller
         $data = $this->db->get($this->m->table, 0, 1);
         $data = array(
             'h' => $data->row(),
-            'content' => 'backend/m_group_d2/m_group_d2_print',
+            'content' => 'backend/m_vendor/m_vendor_print',
         );
         $this->load->view('layout_print', $data);
     }

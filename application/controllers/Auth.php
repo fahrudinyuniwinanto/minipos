@@ -34,18 +34,8 @@ class Auth extends CI_Controller
         $data_tbl = array('users');
         foreach ($data_tbl as $key => $vtbl) {
             $login = $this->Auth_model->login_multitable($this->input->post('username'), md5($this->input->post('password')), $vtbl);
-            // die($this->db->last_query());
             if ($login == 1) {
-                // die($value . "=" . $login);
-                //          ambil detail data
                 $row = $this->Auth_model->data_login_multitable($this->input->post('username'), md5($this->input->post('password')), $vtbl);
-                // switch ($vtbl) { //sesuai id di tabel user_group
-                //     case 'users':
-                //         $grup = 1;
-                //         break;
-                // }
-                // die($grup."dfdf");
-                //          daftarkan session
                 $data = array(
                     'logged'   => true,
                     'shift'  => $this->input->post("shift", true),
@@ -56,7 +46,6 @@ class Auth extends CI_Controller
                     'email'    => $row->email,
                     'foto'     => $row->foto,
                     'level'    => $row->id_group,
-                    'id_cabang'   => $row->id_cabang,
                 );
                 $this->session->set_userdata($data);
 
@@ -64,7 +53,6 @@ class Auth extends CI_Controller
                 redirect(site_url('backend'));
             }
         }
-        // die("asdf");
         //            tampilkan pesan error
         $this->session->set_flashdata('msgcaptcha', '<i class="fa fa-warning"></i> Username atau password belum tepat');
         redirect(site_url(''));

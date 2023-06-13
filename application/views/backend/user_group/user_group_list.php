@@ -8,7 +8,7 @@
         <div class="col-lg-12">
             <div class="ibox float-e-margins">
                 <div class="ibox-title">
-                    <h2><b>List User_group</b></h2>
+                    <h2><b>List User Group</b></h2>
                     <?php if ($this->session->userdata('message') != '') {?>
                     <div class="alert alert-success alert-dismissable">
                                 <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
@@ -50,10 +50,7 @@
                 <th class="text-center">No</th>
 		<th class="text-center">Group Name</th>
 		<th class="text-center">Note</th>
-		<th class="text-center">Created By</th>
 		<th class="text-center">Created At</th>
-		<th class="text-center">Updated By</th>
-		<th class="text-center">Updated At</th>
 		<th class="text-center">Action</th>
             </tr>
             </thead>
@@ -65,10 +62,7 @@
 			<td width="80px"><?php echo ++$start ?></td>
 			<td><?php echo $user_group->group_name ?></td>
 			<td><?php echo $user_group->note ?></td>
-			<td><?php echo $user_group->created_by ?></td>
 			<td><?php echo tanggal_indo(date_format(date_create($user_group->created_at),"Y-m-d")); ?></td>
-			<td><?php echo $user_group->updated_by ?></td>
-			<td><?php echo $user_group->updated_at ?></td>
 			<td style="text-align:center" width="200px">
 				<?php 
 				echo anchor(site_url('user_group/read/'.$user_group->id),'Read','class="text-navy"'); 

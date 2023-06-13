@@ -8,8 +8,8 @@
     <meta name="author" content="<?= data_app('META_AUTHOR') ?>">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?= data_app() ?></title>
-    <link rel="icon" href="https://apotikwaringin.com/wp-content/uploads/2020/08/cropped-logo-32x32.jpeg" sizes="32x32">
-    <meta name="msapplication-TileImage" content="https://apotikwaringin.com/wp-content/uploads/2020/08/cropped-logo-270x270.jpeg">
+    <link rel="icon" href="<?= base_url() ?>assets/img/logoakasia.png" sizes="32x32">
+    <meta name="msapplication-TileImage" content="<?= base_url() ?>assets/img/logoakasia.png">
     <link href="<?= base_url() ?>assets/vendor/inspinia/css/bootstrap.min.css" rel="stylesheet">
     <link href="<?= base_url() ?>assets/vendor/inspinia/font-awesome/css/font-awesome.css" rel="stylesheet">
     <link href="<?= base_url() ?>assets/vendor/sweetalert/css/sweetalert.css" rel="stylesheet">
@@ -142,8 +142,8 @@ lookup();
                             <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                                 <span class="clear"> <span class="block m-t-xs"> <strong class="font-bold">
                                             <?= $this->session->userdata('fullname') ?></strong>
-                                    </span> <span class="text-muted text-xs block"><?= $this->db->get_where('m_cabang', ['id' => getSession('id_cabang')])->row()->nama ?>
-                                        <b class="caret"></b></span>
+                                    </span> <span class="text-muted text-xs block">
+                                        Akun <b class="caret"></b></span>
                                 </span> </a>
                             <ul class="dropdown-menu animated fadeInRight m-t-xs">
                                 <!-- <li><a href="#">
@@ -154,124 +154,35 @@ lookup();
                                 <li><a href="<?= base_url() ?>users/changePassword"><i class="fa fa-key"></i> Ubah
                                         Password</a></li>
                                 <li><a href="#"><i class="fa fa-shift"></i>
-                                        <?= "Shift " . getSession('shift') ?></a>
+                                        <?= "Shift " . getSession('email') ?></a>
                                 </li>
                                 <li class="divider"></li>
                                 <li><a href="<?= base_url() ?>auth/logout">Keluar</a></li>
                             </ul>
                         </div>
                         <div class="logo-element">
-                            AWM
-                        </div>
+                            AKS
                     </li>
                     <li><a href="<?= base_url() ?>backend"><i class="fa fa-th-large"></i> <span class="nav-label">Beranda</span><span class="label label-primary pull-right"></span></a>
+                    <li><a href="<?= base_url() ?>m_barang"><i class="fa fa-database"></i> <span class="nav-label">Barang</span><span class="label label-primary pull-right"></span></a>
+                    <li><a href="<?= base_url() ?>m_vendor"><i class="fa fa-home"></i> <span class="nav-label">Vendor</span><span class="label label-primary pull-right"></span></a>
+                    <li><a href="<?= base_url() ?>jual_h"><i class="fa fa-shopping-cart"></i> <span class="nav-label">Kasir</span><span class="label label-primary pull-right"></span></a>
                     </li>
                     </li>
                     </li>
-                    <li class="">
-                        <?php if (is_allow('M_MASTER')) : ?>
-                            <a href="#"><i class="fa fa-database"></i> <span class="nav-label">Master</span> <span class="fa arrow"></span></a>
-                        <?php endif; ?>
-                        <ul class="nav nav-second-level">
-                            <li class="<?= is_allow('M_BARANG') ? '' : 'hide' ?>"><a href="<?= base_url() ?>m_barang">Barang</a></li>
-                            <li class="<?= is_allow('M_SATUAN') ? '' : 'hide' ?>"><a href="<?= base_url() ?>m_satuan">Satuan</a></li>
-                            <li class="<?= is_allow('M_SUPLIER') ? '' : 'hide' ?>"><a href="<?= base_url() ?>m_supplier">Supplier</a></li>
-                            <li class="<?= is_allow('M_CUSTOMER') ? '' : 'hide' ?>"><a href="<?= base_url() ?>m_customer">Customer</a></li>
-                            <li class="<?= 'hide' ?>"><a href="<?= base_url() ?>m_cabang">Cabang</a></li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="#"><i class="fa fa-truck"></i> <span class="nav-label">Pembelian</span> <span class="fa arrow"></span></a>
-                        <ul class="nav nav-second-level">
-                            <li class="<?= is_allow('M_BELI') ? '' : 'hide' ?>"><a href="<?= base_url() ?>beli_h">Data Pembelian</a></li>
-                        </ul>
-                    </li>
-                    <li class="<?= is_allow('M_JUAL') ? '' : 'hide' ?>">
-                        <a href="#"><i class="fa fa-shopping-cart"></i> <span class="nav-label">Penjualan</span>
+
+                    <li class="<?= is_allow('M_LAP_JUAL') ? '' : 'hide' ?>">
+                        <a href="#"><i class="fa fa-pie-chart"></i> <span class="nav-label">Laporan</span>
                             <span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
-                            <li class="<?= is_allow('M_JUAL') ? '' : 'hide' ?>"><a href="<?= base_url() ?>jual_h">Data Penjualan</a></li>
-                            <li class="<?= is_allow('M_TAGIHAN_BPJS') ? '' : 'hide' ?>"><a href="<?= base_url() ?>tagihan_bpjs">Tagihan BPJS</a></li>
-                        </ul>
-                    </li>
-                    <li class="">
-                        <a class="<?= is_allow('M_MUTASI') ? '' : 'hide' ?>" href="#"><i class="fa fa-exchange"></i> <span class="nav-label">Mutasi</span> <span class="fa arrow"></span></a>
-                        <ul class="nav nav-second-level">
-                            <li><a href="<?= base_url() ?>mutasi_h">Mutasi Barang</a></li>
-                        </ul>
-                    </li>
-                    <li class="">
-                        <a class="<?= is_allow('M_SO') ? '' : 'hide' ?>" href="#"><i class="fa fa-cube"></i> <span class="nav-label">Stock Opname</span> <span class="fa arrow"></span></a>
-                        <ul class="nav nav-second-level">
-                            <li><a href="<?= base_url() ?>so_h">Stock Opname</a></li>
-                        </ul>
-                    </li>
-                    <li class="">
-                        <a href="#"><i class="fa fa-dollar"></i> <span class="nav-label">Pembayaran</span> <span class="fa arrow"></span></a>
-                        <ul class="nav nav-second-level">
-                            <li class="<?= is_allow('M_HUTANG') ? '' : 'hide' ?>"><a href="<?= base_url() ?>hutang_h">Hutang ke Vendor</a></li>
-                            <li class="<?= is_allow('M_PIUTANG') ? '' : 'hide' ?>"><a href="<?= base_url() ?>piutang_h">Piutang Customer</a></li>
-                        </ul>
-                    </li>
-                    
-                    <li class="<?= is_allow('M_LAP_BELI') ? '' : 'hide' ?>">
-                        <a href="#"><i class="fa fa-pie-chart"></i> <span class="nav-label">Laporan Pembelian</span>
-                            <span class="fa arrow"></span></a>
-                        <ul class="nav nav-second-level">
-                            <li><a href="<?= base_url() ?>laporan/laporanPembelian/umum">Umum</a>
-                            <li><a href="<?= base_url() ?>laporan/laporanPembelian/mk">MK</a>
-                            <li><a href="<?= base_url() ?>laporan/laporanPembelian/bpjs">BPJS</a>
-                            <li><a href="<?= base_url() ?>laporan/laporanPembelian/all">Semua Pembelian</a>
-                            <li><a href="<?= base_url() ?>laporan/laporanKasKeluar">Pembelian Perobat</a></li>
+                            <li><a href="<?= base_url() ?>laporan/laporanPenjualanDetil">Penjualan</a></li>
+
                     </li>
                 </ul>
                 </li>
-                <li class="<?= is_allow('M_LAP_JUAL') ? '' : 'hide' ?>">
-                    <a href="#"><i class="fa fa-pie-chart"></i> <span class="nav-label">Laporan Penjualan</span>
-                        <span class="fa arrow"></span></a>
-                    <ul class="nav nav-second-level">
-                        <li><a href="<?= base_url() ?>laporan/laporanPenjualanDetil">Penjualan Detil</a></li>
-                        <li><a href="<?= base_url() ?>laporan/laporanPenjualan/umum">Umum Pershift</a>
-                        <li><a href="<?= base_url() ?>laporan/laporanPenjualan/mk">MK Pershift</a>
-                        <li><a href="<?= base_url() ?>laporan/laporanPenjualan/resep">Resep Pershift</a>
-                        <li><a href="<?= base_url() ?>laporan/laporanPenjualan/dokel">Dokel Pershift</a>
-                        <li><a href="<?= base_url() ?>laporan/laporanPenjualan/all">Semua Pershift</a>
-                        </li>
-                    </ul>
-                </li>
                 <li class="">
-                    <a href="#"><i class="fa fa-pie-chart"></i> <span class="nav-label">Laporan Mutasi</span>
-                        <span class="fa arrow"></span></a>
-                    <ul class="nav nav-second-level">
-                        <li><a href="<?= base_url() ?>laporan/laporanMutasi">Mutasi</a></li>
                 </li>
-                </ul>
-                </li>
-                <li class="">
-                    <a href="#"><i class="fa fa-money"></i> <span class="nav-label">Laporan Keuangan</span>
-                        <span class="fa arrow"></span></a>
-                    <ul class="nav nav-second-level">
-                        <li><a href="<?= base_url() ?>sia_akun_waringin"> <i class="fa fa-key"></i> COA Akun</a></li>
-                        <li><a href="<?= base_url() ?>sia_transaksi_waringin"> <i class="fa fa-calendar"></i> Jurnal Umum</a></li>
-                        <li><a href="<?= base_url() ?>sia_transaksi_waringin/buku_besar"> <i class="fa fa-book"></i> Buku Besar</a></li>
-                        <li><a href="<?= base_url() ?>sia_transaksi_waringin/neraca_lajur"> <i class="fa fa-calculator"></i> Neraca Lajur</a></li>
-                        <li><a href="<?= base_url() ?>sia_akun_waringin/penerimaan"><i class="fa fa-money"></i> Penerimaan & Pengeluaran</a></li>
-                            <li><a href="<?= base_url() ?>sia_akun_waringin/laba_rugi"><i class="fa fa-dollar"></i> Perhitungan Laba Rugi</a></li>
-                            <li><a href="<?= base_url() ?>sia_akun_waringin/neraca"><i class="fa fa-unlink"></i> Neraca</a></li>
-                    </ul>
-                </li>
-                <li class="<?= is_allow('M_LAPORAN') ? '' : 'hide' ?>">
-                        <a href="#"><i class="fa fa-pie-chart"></i> <span class="nav-label">Laporan Lain</span> <span class="fa arrow"></span></a>
-                        <ul class="nav nav-second-level">
-                            <li><a href="<?= base_url() ?>laporan/laporanBarang">List Barang</a></li>
-                            <!-- <li><a href="<?= base_url() ?>laporan/laporanOmset">Laporan Omset</a></li> -->
-                            <!-- <li><a href="<?= base_url() ?>laporan/laporanStock">Stock Barang</a></li> -->
-                            <li><a href="<?= base_url() ?>laporan/laporanSo">Stock Opname</a>
-                            <li class="<?= getSession('id_cabang') == 'WR001' ? '' : 'hide' ?>"><a href="<?= base_url() ?>laporan/prinTagihanBpjs">Tagihan BPJS</a>
-                            </li>
-                            <!-- <li><a href="<?= base_url() ?>laporan/laporanJual">Laporan Penjualan</a></li> -->
-                        </ul>
-                    </li>
+
                 <li class="<?= is_allow('M_USERS') ? '' : 'hide' ?>">
                     <a href="#"><i class="fa fa-user"></i> <span class="nav-label">Pengguna</span> <span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
@@ -290,7 +201,6 @@ lookup();
                     <ul class="nav nav-second-level">
                         <li><a href="<?= base_url() ?>sy_config">Konfigurasi</a></li>
                         <li><a href="<?= base_url() ?>kategori">Kategori</a></li>
-                        <li><a href="<?= base_url() ?>m_barang/qtyawalfrm">Qty Stok Awal</a></li>
                     </ul>
                 </li>
 
@@ -304,8 +214,7 @@ lookup();
             <div class="row border-bottom">
                 <nav class="navbar navbar-static-top white-bg" role="navigation" style="margin-bottom: 0">
                     <div class="navbar-header">
-                        <a class="navbar-minimalize minimalize-styl-2 btn btn-info " href="#">SHIFT
-                            <?= getSession('shift') ?></a>
+                        <a class="navbar-minimalize minimalize-styl-2 btn btn-info " href="#"><i class="fa fa-bars"></i></a>
                         <!-- <form role="search" class="navbar-form-custom" action="search_results.html">
                                 <div class="form-group">
                                     <label></label>

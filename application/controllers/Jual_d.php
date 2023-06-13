@@ -7,7 +7,7 @@ if (!defined('BASEPATH')) {
 class Jual_d extends CI_Controller
 {
     private $m;
-    public function __construct()
+    function __construct()
     {
         parent::__construct();
         is_logged();
@@ -25,12 +25,12 @@ class Jual_d extends CI_Controller
 
     public function getList()
     {
-        $frm      = $this->input->get('frm');
-        $q        = $this->input->get('q');
+        $frm = $this->input->get('frm');
+        $q = $this->input->get('q');
         $order_by = $this->input->get('order_by');
-        $page     = $this->input->get('page');
-        $limit    = $this->input->get('limit');
-        $limit    = @$limit == 0 ? 10 : $limit;
+        $page = $this->input->get('page');
+        $limit = $this->input->get('limit');
+        $limit = @$limit == 0 ? 10 : $limit;
 
         $this->queryList($total, $current, $page, $limit, $q, ['isactive' => 1]);
 
@@ -57,11 +57,11 @@ class Jual_d extends CI_Controller
 
     public function lookup()
     {
-        $q        = $this->input->get('q');
+        $q = $this->input->get('q');
         $order_by = $this->input->get('order_by');
-        $start    = $this->input->get('start');
-        $limit    = $this->input->get('limit');
-        $limit    = @$limit == 0 ? 10 : $limit;
+        $start = $this->input->get('start');
+        $limit = $this->input->get('limit');
+        $limit = @$limit == 0 ? 10 : $limit;
 
         $total = $this->db->from($this->m->table)
             ->like('id', $q)
@@ -76,8 +76,8 @@ class Jual_d extends CI_Controller
     public function save()
     {
         $req = json_decode(file_get_contents('php://input'));
-        $h   = $req->h;
-        $f   = $req->f;
+        $h = $req->h;
+        $f = $req->f;
 
         $arr = [];
         foreach ($this->m->getFields() as $k => $v) {
@@ -89,8 +89,8 @@ class Jual_d extends CI_Controller
             $arr['created_by'] = $this->session->userdata('username');
             $this->db->insert($this->m->table, $arr);
         } else {
-            $arr['updated_at'] = date("Y-m-d H:i:s");
-            $arr['updated_by'] = $this->session->userdata('username');
+            // $arr['updated_at'] = date("Y-m-d H:i:s");
+            // $arr['updated_by'] = $this->session->userdata('username');
             $this->db->replace($this->m->table, $arr);
         }
         header('Content-Type: application/json');
@@ -101,7 +101,7 @@ class Jual_d extends CI_Controller
     {
         $this->db->where($this->m->id, $id);
         $data = $this->db->get($this->m->table, 0, 1);
-        $h    = $data->row();
+        $h = $data->row();
         header('Content-Type: application/json');
         echo json_encode(compact(['h']));
     }
@@ -116,11 +116,11 @@ class Jual_d extends CI_Controller
 
     public function prin()
     {
-        $id = $this->input->get('id', true);
+        $id = $this->input->get('id', TRUE);
         $this->db->where($this->m->id, $id);
         $data = $this->db->get($this->m->table, 0, 1);
         $data = array(
-            'h'       => $data->row(),
+            'h' => $data->row(),
             'content' => 'backend/jual_d/jual_d_print',
         );
         $this->load->view('layout_print', $data);

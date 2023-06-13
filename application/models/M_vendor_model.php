@@ -4,9 +4,9 @@ if (!defined('BASEPATH')) {
     exit('No direct script access allowed');
 }
 
-class Mutasi_d_model extends CI_Model {
+class M_vendor_model extends CI_Model {
 
-    public $table = 'mutasi_d';
+    public $table = 'm_vendor';
     public $id    = 'id';
     public $order = 'DESC';
 
@@ -17,11 +17,11 @@ class Mutasi_d_model extends CI_Model {
     public function getFields() {
         return [
             'id',
-            'id_mutasi',
-            'id_barang',
-            'qty',
-            'hrg_satuan',
-            'total',
+            'nama',
+            'alamat',
+            'telp',
+            'created_at',
+            'created_by',
 
         ];
     }
