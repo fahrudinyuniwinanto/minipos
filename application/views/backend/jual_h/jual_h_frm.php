@@ -17,11 +17,11 @@
                 <tr ng-repeat="(k,v) in $data" class="pointer" ng-click="read(v.id)">
                     <td title="'No'">{{k+1}}</td>
                     <td title="'Customer'" filter="{customer: 'text'}" sortable="'customer'">{{v.customer}}</td>
-                    <td title="'Tanggal'" filter="{tanggal: 'text'}" sortable="'tanggal'">{{v.tanggal}}</td>
-                    <td title="'Cara Bayar'" filter="{cara_bayar: 'text'}" sortable="'cara_bayar'">{{v.cara_bayar}}</td>
-                    <td title="'Total'" filter="{total: 'text'}" sortable="'total'">{{v.total}}</td>
-                    <td title="'Jumlah Bayar'" filter="{jumlah_bayar: 'text'}" sortable="'jumlah_bayar'">{{v.jumlah_bayar}}</td>
-                    <td title="'Jumlah Kembali'" filter="{jumlah_kembali: 'text'}" sortable="'jumlah_kembali'">{{v.jumlah_kembali}}</td>
+                    <td title="'Tanggal'" filter="{tanggal: 'text'}" sortable="'tanggal'" align="center">{{v.tanggal}}</td>
+                    <td title="'Cara Bayar'" filter="{cara_bayar: 'text'}" sortable="'cara_bayar'" align="center">{{v.cara_bayar}}</td>
+                    <td title="'Total'" filter="{total: 'text'}" sortable="'total'" align="right"><strong>{{v.total|number:0}}</strong></td>
+                    <td title="'Jumlah Bayar'" filter="{jumlah_bayar: 'text'}" sortable="'jumlah_bayar'" align="right">{{v.jumlah_bayar|number:0}}</td>
+                    <td title="'Jumlah Kembali'" filter="{jumlah_kembali: 'text'}" sortable="'jumlah_kembali'" align="right">{{v.jumlah_kembali|number:0}}</td>
                 </tr>
             </table>
         </div>

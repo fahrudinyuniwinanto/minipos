@@ -1,6 +1,6 @@
 <!-- //Subscribe Youtube Channel Peternak Kode on https://youtube.com/c/peternakkode -->
 <!doctype html>
-<h3>Laporan Detil Penjualan</h3>
+<h3>Laporan Penjualan</h3>
 <hr>
 <div class="">
     <div id="pil-tanggal">
