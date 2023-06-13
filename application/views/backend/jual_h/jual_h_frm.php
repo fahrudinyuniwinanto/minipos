@@ -44,7 +44,7 @@
                 <label title="id">ID</label>
                 <input type="text" ng-model="h.id" class="form-control input-sm" readonly>
                 <label title="customer">Customer</label>
-                <input type="text" ng-model="h.customer" class="form-control input-sm">
+                <input type="text" ng-model="h.customer" class="form-control input-sm text-uppercase">
 
             </div>
             <div class="col-sm-3">
@@ -59,11 +59,11 @@
             </div>
             <div class="col-sm-3">
                 <label title="total">Total</label>
-                <input type="text" ng-model="h.total" class="form-control input-lg" readonly>
+                <input type="text" ng-model="h.total" class="form-control input-lg" awnum="default" readonly>
                 <label title="jumlah_bayar">Jumlah Bayar</label>
-                <input type="text" ng-model="h.jumlah_bayar" class="form-control input-lg">
+                <input type="text" ng-model="h.jumlah_bayar" class="form-control input-lg" ng-keyup="bayar()" awnum="default">
                 <label title="jumlah_kembali">Jumlah Kembali</label>
-                <input type="text" ng-model="h.jumlah_kembali" class="form-control input-lg" readonly>
+                <input type="text" ng-model="h.jumlah_kembali" class="form-control input-lg" awnum="default" readonly>
             </div>
         </div>
         <div class="row">
@@ -82,10 +82,10 @@
                             <td class="pointer" ng-click="lookup('d_barang',k)">
                                 <div class="" title="ID: {{v.id_barang}}"><span class="text-success"><i class="fa fa-search"></i></span>{{v.nm_barang}}</div>
                             </td>
-                            <td class="p-0"><input type="text" ng-model="v.qty" class="form-control input-sm no-border-text" placeholder="..."></td>
+                            <td class="p-0"><input type="text" ng-model="v.qty" class="form-control input-sm no-border-text" ng-keyup="hitungRow(k)" placeholder="..."></td>
                             <td class="p-0"><input type="text" ng-model="v.satuan" class="form-control input-sm no-border-text" readonly></td>
-                            <td class="p-0"><input type="text" ng-model="v.harga" class="form-control input-sm no-border-text" readonly></td>
-                            <td class="p-0"><input type="text" ng-model="v.total" class="form-control input-sm no-border-text" readonly></td>
+                            <td class="p-0"><input type="text" ng-model="v.harga" class="form-control input-sm no-border-text" awnum="default" readonly></td>
+                            <td class="p-0"><input type="text" ng-model="v.total" class="form-control input-sm no-border-text" awnum="default" readonly></td>
                         </tr>
                     </table>
                 </div>
@@ -199,6 +199,32 @@
                             });
                     }
 
+                    $scope.hitungRow = function(fn) {
+                        let total = $scope.d[fn].total == null ? 0 : $scope.d[fn].total;
+                        let qty_entry = $scope.d[fn].qty == null ? 0 : $scope.d[fn].qty;
+                        let harga_satuan = $scope.d[fn].harga == null ? 0 : $scope.d[fn].harga;
+
+                        $scope.d[fn].total = (qty_entry * harga_satuan);
+                        $scope.grandTotal();
+                    }
+
+                    $scope.grandTotal = function() {
+                        let total = 0;
+                        //data detil
+                        angular.forEach($scope.d, function(v, k) {
+                            let dtotal = v.total == null ? 0 : v.total;
+                            total = parseFloat(total) + parseFloat(dtotal);
+                        });
+
+                        $scope.h.total=total;
+                    }
+
+                    $scope.bayar = function() {
+                        let total = $scope.h.total == null ? 0 : $scope.h.total;
+                        let jumlah_bayar = $scope.h.jumlah_bayar == null ? 0 : $scope.h.jumlah_bayar;
+                        $scope.h.jumlah_kembali = (jumlah_bayar - total);
+                    }
+
                     $scope.prin = function(id) {
                         if (id == undefined) {
                             var id = $scope.h[$scope.f.pk];
@@ -216,7 +242,8 @@
                                         $scope.d[fn].harga = json.harga_jual;
                                         $scope.d[fn].satuan = json.satuan;
                                         $scope.d[fn].qty = 1;
-                                        $scope.d[fn].total = json.harga_jual*1;
+                                        $scope.d[fn].total = json.harga_jual * 1;
+                                        $scope.grandTotal();
                                         $scope.$apply();
                                     });
                                 break;

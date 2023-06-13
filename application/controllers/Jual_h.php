@@ -12,7 +12,9 @@ class Jual_h extends CI_Controller
         parent::__construct();
         is_logged();
         $this->load->model('Jual_h_model');
-        $this->m = new Jual_h_model();
+        $this->load->model('Jual_d_model');
+        $this->m    = new Jual_h_model();
+        $this->m_d1 = new Jual_d_model();
     }
 
     public function index()
@@ -77,17 +79,22 @@ class Jual_h extends CI_Controller
     {
         $req = json_decode(file_get_contents('php://input'));
         $h = $req->h;
+        $d   = $req->d;
         $f = $req->f;
 
         $arr = [];
         foreach ($this->m->getFields() as $k => $v) {
             $arr[$v] = @$h->$v;
         }
-        $arr['isactive'] = 1;
         if ($f->crud == 'c') {
             $arr['created_at'] = date("Y-m-d H:i:s");
             $arr['created_by'] = $this->session->userdata('username');
             $this->db->insert($this->m->table, $arr);
+            $h_id = $this->db->insert_id();
+            $h    = $this->db->get_where($this->m->table, ['id' => $h_id])->row();
+            if ($d) {
+                $this->saveD1($h_id, $d);
+            }
         } else {
             // $arr['updated_at'] = date("Y-m-d H:i:s");
             // $arr['updated_by'] = $this->session->userdata('username');
@@ -95,6 +102,23 @@ class Jual_h extends CI_Controller
         }
         header('Content-Type: application/json');
         echo json_encode('Simpan data berhasil');
+    }
+
+    
+    private function saveD1($id, $d)
+    {
+        foreach ($d as $k1 => $v1) {
+            foreach ($this->m_d1->getFields() as $k => $v) {
+                $arr[$v] = @$v1->$v;
+            }
+            $arr['id_penjualan'] = $id;
+            if (@$arr->id != "" && $this->db->get_where('jual_d', ['id' => $arr->id])->row()->id != "") {
+                $this->db->replace($this->m_d1->table, $arr);
+            } else {
+                unset($arr['id']);
+                $this->db->insert($this->m_d1->table, $arr);
+            }
+        }
     }
 
     public function read($id)

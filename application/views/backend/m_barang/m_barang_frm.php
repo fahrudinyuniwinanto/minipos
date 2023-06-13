@@ -34,7 +34,6 @@
             <button type="button" class="btn btn-sm btn-info" ng-click="f.tab='list'"><i class="fa fa-arrow-left"></i> Kembali</button>
             <button type="button" class="btn btn-sm btn-primary" ng-click="save()">Simpan</button>
             <button type="button" class="btn btn-sm btn-warning" ng-click="copy()" ng-if="f.crud=='u'">Duplikasi</button>
-            <button type="button" class="btn btn-sm btn-warning" ng-click="prin()" ng-if="f.crud=='u'">Cetak</button>
             <button type="button" class="btn btn-sm btn-danger" ng-click="del()" ng-if="f.crud=='u'">Hapus</button>
         </div>
         <h3>Form Barang</h3>
@@ -73,7 +72,7 @@
                     <option ng-repeat="v in ['PCS','DUS']" ng-value="v">{{v}}</option>
                 </select>
                 <label title="nama">Penginput</label>
-                <input type="text" ng-model="h.created_by" class="form-control input-sm text-uppercase">
+                <input type="text" ng-model="h.created_by" class="form-control input-sm text-uppercase" readonly>
                 
             </div>
         </div>
