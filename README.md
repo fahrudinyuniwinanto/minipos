@@ -20,4 +20,7 @@ Build with Codeigniter 3.1.9 + AngularJs
 * run project on localhost/minipos
 * enjoy the awesome app!
 
+Developed by https://www.linkedin.com/in/fahrudin-mgl/
+
+
 
