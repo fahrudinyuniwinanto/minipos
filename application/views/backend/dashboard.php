@@ -93,7 +93,7 @@
                             class="table table-condensed table-bordered table-hover" style="white-space: nowrap;">
                             <tr ng-repeat="(k,v) in $data" class="">
                                 <td title="'No'" align="center">{{k+1}}</td>
-                                <td title="'Customer'" filter="{customer: 'text'}" sortable="'customer'" class="text-center">
+                                <td title="'Customer'" filter="{customer: 'text'}" sortable="'customer'" class="text-left">
                                     {{v.customer}}
                                 </td>
                                 <td title="'Tanggal Beli'" filter="{tanggal: 'text'}" sortable="'tanggal'"
