@@ -30,7 +30,7 @@ CREATE TABLE `jual_d` (
   `created_at` datetime DEFAULT NULL,
   `created_by` varchar(20) DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1 ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1 ROW_FORMAT=DYNAMIC;
 
 /*Data for the table `jual_d` */
 
@@ -38,7 +38,11 @@ insert  into `jual_d`(`id`,`id_penjualan`,`id_barang`,`harga`,`qty`,`total`,`cre
 (1,3,1,92000,2,NULL,NULL,NULL),
 (2,3,2,68000,3,NULL,NULL,NULL),
 (3,4,2,92000,1,92000,NULL,NULL),
-(4,4,1,68000,1,68000,NULL,NULL);
+(4,4,1,68000,1,68000,NULL,NULL),
+(5,5,1,68000,3,204000,NULL,NULL),
+(6,5,2,92000,5,460000,NULL,NULL),
+(7,6,1,68000,45,3060000,NULL,NULL),
+(8,6,2,92000,2,184000,NULL,NULL);
 
 /*Table structure for table `jual_h` */
 
@@ -55,14 +59,14 @@ CREATE TABLE `jual_h` (
   `created_at` datetime DEFAULT NULL,
   `created_by` varchar(20) DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1 ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1 ROW_FORMAT=DYNAMIC;
 
 /*Data for the table `jual_h` */
 
 insert  into `jual_h`(`id`,`customer`,`tanggal`,`cara_bayar`,`total`,`jumlah_bayar`,`jumlah_kembali`,`created_at`,`created_by`) values 
-(1,'ASEPTIAN','2023-06-13','TUNAI',412000,500000,88000,'2023-06-13 22:13:22','ruri'),
-(2,'RIO','2023-06-13','TUNAI',504000,600000,96000,'2023-06-13 22:15:11','ruri'),
-(4,'BAEDOWY','2023-06-14','TUNAI',160000,200000,40000,'2023-06-14 07:45:21','ruri');
+(4,'BAEDOWY','2023-06-14','TUNAI',160000,200000,40000,'2023-06-14 07:45:21','ruri'),
+(5,'RIO','2023-06-14','TUNAI',664000,700000,36000,'2023-06-14 09:30:59','fahrudin'),
+(6,'ASEPTIAN','0000-00-00','TRANSFER',3244000,3500000,256000,'2023-06-14 09:32:35','fahrudin');
 
 /*Table structure for table `kategori` */
 
