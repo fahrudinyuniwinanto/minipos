@@ -81,6 +81,7 @@ class Jual_h extends CI_Controller
         $h = $req->h;
         $d   = $req->d;
         $f = $req->f;
+        // wfDebug($d);
 
         $arr = [];
         foreach ($this->m->getFields() as $k => $v) {
@@ -126,8 +127,13 @@ class Jual_h extends CI_Controller
         $this->db->where($this->m->id, $id);
         $data = $this->db->get($this->m->table, 0, 1);
         $h = $data->row();
+        $d=$this->db->get_where('jual_d',['id_penjualan'=>$h->id])->result();
+        foreach ($d as $k => $v) {
+            $d[$k]->nm_barang = $this->db->get_where('m_barang',['id'=>$v->id_barang])->row()->nama;
+            $d[$k]->satuan = $this->db->get_where('m_barang',['id'=>$v->id_barang])->row()->satuan;
+        }
         header('Content-Type: application/json');
-        echo json_encode(compact(['h']));
+        echo json_encode(compact(['h','d']));
     }
 
     public function delete($id)

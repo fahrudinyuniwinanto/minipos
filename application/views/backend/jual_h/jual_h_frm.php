@@ -66,12 +66,13 @@
                 <input type="text" ng-model="h.jumlah_kembali" class="form-control input-lg" awnum="default" readonly>
             </div>
         </div>
+        <hr>
         <div class="row">
             <div class="col-md-12">
                 <div class="table-responsive">
                     <h4>List Barang </h4>
                     <table class="table" style="white-space: nowrap;">
-                        <tr>
+                        <tr class="success">
                             <th>Nama Barang</th>
                             <th>Qty</th>
                             <th>Satuan</th>
@@ -118,7 +119,7 @@
                     }
 
                     $scope.addD = function() {
-                        $scope.d.push([]);
+                        $scope.d.push({});
                     }
 
                     $scope.delD = function(k) {

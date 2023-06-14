@@ -30,13 +30,15 @@ CREATE TABLE `jual_d` (
   `created_at` datetime DEFAULT NULL,
   `created_by` varchar(20) DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1 ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1 ROW_FORMAT=DYNAMIC;
 
 /*Data for the table `jual_d` */
 
 insert  into `jual_d`(`id`,`id_penjualan`,`id_barang`,`harga`,`qty`,`total`,`created_at`,`created_by`) values 
-(1,3,NULL,NULL,NULL,NULL,NULL,NULL),
-(2,3,NULL,NULL,NULL,NULL,NULL,NULL);
+(1,3,1,92000,2,NULL,NULL,NULL),
+(2,3,2,68000,3,NULL,NULL,NULL),
+(3,4,2,92000,1,92000,NULL,NULL),
+(4,4,1,68000,1,68000,NULL,NULL);
 
 /*Table structure for table `jual_h` */
 
@@ -53,14 +55,14 @@ CREATE TABLE `jual_h` (
   `created_at` datetime DEFAULT NULL,
   `created_by` varchar(20) DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1 ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1 ROW_FORMAT=DYNAMIC;
 
 /*Data for the table `jual_h` */
 
 insert  into `jual_h`(`id`,`customer`,`tanggal`,`cara_bayar`,`total`,`jumlah_bayar`,`jumlah_kembali`,`created_at`,`created_by`) values 
 (1,'ASEPTIAN','2023-06-13','TUNAI',412000,500000,88000,'2023-06-13 22:13:22','ruri'),
 (2,'RIO','2023-06-13','TUNAI',504000,600000,96000,'2023-06-13 22:15:11','ruri'),
-(3,'RIO','2023-06-13','TUNAI',504000,600000,96000,'2023-06-13 22:15:42','ruri');
+(4,'BAEDOWY','2023-06-14','TUNAI',160000,200000,40000,'2023-06-14 07:45:21','ruri');
 
 /*Table structure for table `kategori` */
 
@@ -72,7 +74,7 @@ CREATE TABLE `kategori` (
   `note` text,
   `for_modul` varchar(200) DEFAULT NULL,
   PRIMARY KEY (`id_kat`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
 
 /*Data for the table `kategori` */
 
@@ -117,7 +119,7 @@ CREATE TABLE `m_vendor` (
   `created_at` datetime DEFAULT NULL,
   `created_by` varchar(20) DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=157 DEFAULT CHARSET=latin1 ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1 ROW_FORMAT=DYNAMIC;
 
 /*Data for the table `m_vendor` */
 
@@ -138,7 +140,7 @@ CREATE TABLE `master_access` (
   `created_at` datetime DEFAULT NULL,
   `created_by` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=144 DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=133 DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
 
 /*Data for the table `master_access` */
 
@@ -195,20 +197,20 @@ CREATE TABLE `user_access` (
   `is_allow` int(1) DEFAULT NULL COMMENT '0=false,1=true',
   `note` text,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=398 DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=400 DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
 
 /*Data for the table `user_access` */
 
 insert  into `user_access`(`id`,`id_group`,`kd_access`,`nm_access`,`is_allow`,`note`) values 
-(5,2,'1',NULL,0,NULL),
+(5,2,'1',NULL,1,NULL),
 (8,1,'1',NULL,1,NULL),
 (15,1,'4',NULL,1,NULL),
 (16,1,'5',NULL,1,NULL),
-(19,2,'5',NULL,0,NULL),
+(19,2,'5',NULL,1,NULL),
 (79,2,'4',NULL,1,NULL),
-(181,1,'104',NULL,1,NULL),
+(181,1,'104',NULL,0,NULL),
 (182,1,'103',NULL,1,NULL),
-(188,1,'113',NULL,1,NULL),
+(188,1,'113',NULL,0,NULL),
 (189,1,'112',NULL,1,NULL),
 (190,1,'114',NULL,1,NULL),
 (191,2,'114',NULL,0,NULL),
@@ -222,9 +224,9 @@ insert  into `user_access`(`id`,`id_group`,`kd_access`,`nm_access`,`is_allow`,`n
 (211,2,'120',NULL,1,NULL),
 (220,1,'125',NULL,1,NULL),
 (221,2,'125',NULL,1,NULL),
-(226,1,'130',NULL,1,NULL),
+(226,1,'130',NULL,0,NULL),
 (227,1,'131',NULL,1,NULL),
-(228,1,'132',NULL,1,NULL),
+(228,1,'132',NULL,0,NULL),
 (229,1,'133',NULL,1,NULL),
 (230,1,'134',NULL,1,NULL),
 (233,1,'137',NULL,1,NULL),
@@ -335,7 +337,9 @@ insert  into `user_access`(`id`,`id_group`,`kd_access`,`nm_access`,`is_allow`,`n
 (393,17,'113',NULL,1,NULL),
 (394,18,'103',NULL,1,NULL),
 (396,18,'142',NULL,1,NULL),
-(397,10,'115',NULL,1,NULL);
+(397,10,'115',NULL,1,NULL),
+(398,2,'130',NULL,1,NULL),
+(399,2,'132',NULL,1,NULL);
 
 /*Table structure for table `user_group` */
 
@@ -350,7 +354,7 @@ CREATE TABLE `user_group` (
   `updated_by` int(11) DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
 
 /*Data for the table `user_group` */
 
@@ -381,13 +385,13 @@ CREATE TABLE `users` (
   `last_login` datetime DEFAULT NULL,
   `id_cabang` varchar(30) DEFAULT NULL,
   PRIMARY KEY (`id_user`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
 
 /*Data for the table `users` */
 
 insert  into `users`(`id_user`,`fullname`,`username`,`password`,`email`,`id_group`,`foto`,`telp`,`note`,`created_by`,`updated_by`,`created_at`,`updated_at`,`note_1`,`ip`,`last_login`,`id_cabang`) values 
-(1,'Ahmad Masruri','ruri','227edf7c86c02a44d17eec9aa5b30cd1','admin@mail.com',1,'a4.jpg','089636555456','',1,1,'2018-03-13 03:06:55','2018-03-13 03:06:55','','','2019-08-27 20:12:45',''),
-(3,'Fahrudin Yuniwinanto','fahrudin','227edf7c86c02a44d17eec9aa5b30cd1','fahrudinyewe@gmail.com',2,'','089636555456','',1,0,'2018-03-13 03:06:55','2018-03-13 03:06:55','',NULL,NULL,'');
+(1,'Nadia Aurelia','nadia','227edf7c86c02a44d17eec9aa5b30cd1','admin@mail.com',1,'','089636555456','',1,1,'2018-03-13 03:06:55','2018-03-13 03:06:55','','','2019-08-27 20:12:45',''),
+(2,'Fahrudin Yuniwinanto','fahrudin','227edf7c86c02a44d17eec9aa5b30cd1','fahrudinyewe@gmail.com',2,'','089636555456','',1,0,'2018-03-13 03:06:55','2018-03-13 03:06:55','',NULL,NULL,'');
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;

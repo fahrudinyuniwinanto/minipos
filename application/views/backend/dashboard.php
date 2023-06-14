@@ -11,25 +11,23 @@
                 <div class="ibox-content">
                     <div class="row">
                         <div class="col-md-4">
-                            <h3 class="no-margins font-bold">Rp.{{(h.today.umum.total)?h.today.umum.total:0|number:0}}
+                            <h3 class="no-margins font-bold">Rp.{{(h.today.daget)?h.today.daget:0|number:0}}
                             </h3>
                             <div class="text-navy">
-                                <h5>{{(h.today.umum.jml)?h.today.umum.jml:0|number:0}} Penjualan Umum</h5>
+                                <h5>Penjualan Gadget</h5>
                             </div>
                         </div>
                         <div class="col-md-4">
-                            <h3 class="no-margins font-bold">Rp.{{(h.today.mk.total)?h.today.mk.total:0|number:0}}</h3>
+                            <h3 class="no-margins font-bold">Rp.{{(h.today.makanan)?h.today.makanan:0|number:0}}</h3>
                             <div class="text-navy">
-                                <h5>{{(h.today.mk.jml)?h.today.mk.jml:0|number:0}}
-                                    Penjualan MK</h5>
+                                <h5>Penjualan Makanan</h5>
                             </div>
                         </div>
                         <div class="col-md-4">
-                            <h3 class="no-margins font-bold">Rp.{{(h.today.resep.total)?h.today.resep.total:0|number:0}}
+                            <h3 class="no-margins font-bold">Rp.{{(h.today.pakaian)?h.today.pakaian:0|number:0}}
                             </h3>
                             <div class="text-navy">
-                                <h5>{{(h.today.resep.jml)?h.today.resep.jml:0|number:0}}
-                                    Penjualan Resep</h5>
+                                <h5>Penjualan Pakaian</h5>
                             </div>
                         </div>
                     </div>
@@ -46,24 +44,23 @@
                 <div class="ibox-content">
                     <div class="row">
                         <div class="col-md-4">
-                            <h3 class="no-margins font-bold">
-                                Rp.{{(h.thismonth.umum.total)?h.thismonth.umum.total:0|number:0}}</h3>
+                            <h3 class="no-margins font-bold">Rp.{{(h.month.daget)?h.month.daget:0|number:0}}
+                            </h3>
                             <div class="text-navy">
-                                <h5>{{(h.thismonth.umum.jml)?h.thismonth.umum.jml:0|number:0}} Penjualan Umum</h5>
+                                <h5>Penjualan Gadget</h5>
                             </div>
                         </div>
                         <div class="col-md-4">
-                            <h3 class="no-margins font-bold">
-                                Rp.{{(h.thismonth.mk.total)?h.thismonth.mk.total:0|number:0}}</h3>
+                            <h3 class="no-margins font-bold">Rp.{{(h.month.makanan)?h.month.makanan:0|number:0}}</h3>
                             <div class="text-navy">
-                                <h5>{{(h.thismonth.mk.jml)?h.thismonth.mk.jml:0|number:0}} Penjualan MK</h5>
+                                <h5>Penjualan Makanan</h5>
                             </div>
                         </div>
                         <div class="col-md-4">
-                            <h3 class="no-margins font-bold">
-                                Rp.{{(h.thismonth.resep.total)?h.thismonth.resep.total:0|number:0}}</h3>
+                            <h3 class="no-margins font-bold">Rp.{{(h.month.pakaian)?h.month.pakaian:0|number:0}}
+                            </h3>
                             <div class="text-navy">
-                                <h5>{{(h.thismonth.resep.jml)?h.thismonth.resep.jml:0|number:0}} Penjualan Resep</h5>
+                                <h5>Penjualan Pakaian</h5>
                             </div>
                         </div>
                     </div>
@@ -96,16 +93,11 @@
                             class="table table-condensed table-bordered table-hover" style="white-space: nowrap;">
                             <tr ng-repeat="(k,v) in $data" class="">
                                 <td title="'No'" align="center">{{k+1}}</td>
-                                <td title="'No Transaksi'" filter="{no_trs: 'text'}" sortable="'no_trs'">{{v.no_trs}}
-                                </td>
-                                <td title="'Jenis'" filter="{jenis: 'text'}" sortable="'jenis'" class="text-center">
-                                    {{v.jenis}}
+                                <td title="'Customer'" filter="{customer: 'text'}" sortable="'customer'" class="text-center">
+                                    {{v.customer}}
                                 </td>
                                 <td title="'Tanggal Beli'" filter="{tanggal: 'text'}" sortable="'tanggal'"
                                     class="text-center">{{v.tanggal}}</td>
-                                <td title="'Customer'" filter="{id_suplier: 'text'}" sortable="'id_suplier'"
-                                    align="center">{{v.nm_customer}}</td>
-                                <!-- <td title="'No PO'" filter="{id_po: 'text'}" sortable="'id_po'">{{v.id_po}}</td> -->
                                 <td title="'Total'" filter="{total: 'text'}" sortable="'total'" class="text-right">
                                     {{v.total|number:0}}</td>
                             </tr>

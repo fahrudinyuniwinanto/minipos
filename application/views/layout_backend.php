@@ -143,7 +143,7 @@ lookup();
                                 <span class="clear"> <span class="block m-t-xs"> <strong class="font-bold">
                                             <?= $this->session->userdata('fullname') ?></strong>
                                     </span> <span class="text-muted text-xs block">
-                                        Akun <b class="caret"></b></span>
+                                        <?=$this->db->get_where('user_group',['id'=>$this->session->userdata('id_user')])->row()->group_name?> <b class="caret"></b></span>
                                 </span> </a>
                             <ul class="dropdown-menu animated fadeInRight m-t-xs">
                                 <!-- <li><a href="#">
@@ -163,10 +163,10 @@ lookup();
                         <div class="logo-element">
                             AKS
                     </li>
-                    <li><a href="<?= base_url() ?>backend"><i class="fa fa-th-large"></i> <span class="nav-label">Beranda</span><span class="label label-primary pull-right"></span></a>
-                    <li><a href="<?= base_url() ?>m_barang"><i class="fa fa-database"></i> <span class="nav-label">Barang</span><span class="label label-primary pull-right"></span></a>
-                    <li><a href="<?= base_url() ?>m_vendor"><i class="fa fa-home"></i> <span class="nav-label">Vendor</span><span class="label label-primary pull-right"></span></a>
-                    <li><a href="<?= base_url() ?>jual_h"><i class="fa fa-shopping-cart"></i> <span class="nav-label">Kasir</span><span class="label label-primary pull-right"></span></a>
+                    <li class="<?= is_allow('M_MASTER') ? '' : 'hide' ?>"><a href="<?= base_url() ?>backend"><i class="fa fa-th-large"></i> <span class="nav-label">Beranda</span><span class="label label-primary pull-right"></span></a>
+                    <li class="<?= is_allow('M_MASTER') ? '' : 'hide' ?>"><a href="<?= base_url() ?>m_barang"><i class="fa fa-database"></i> <span class="nav-label">Barang</span><span class="label label-primary pull-right"></span></a>
+                    <li class="<?= is_allow('M_MASTER') ? '' : 'hide' ?>"><a href="<?= base_url() ?>m_vendor"><i class="fa fa-home"></i> <span class="nav-label">Vendor</span><span class="label label-primary pull-right"></span></a>
+                    <li class="<?= is_allow('M_MASTER') ? '' : 'hide' ?>"><a href="<?= base_url() ?>jual_h"><i class="fa fa-shopping-cart"></i> <span class="nav-label">Kasir</span><span class="label label-primary pull-right"></span></a>
                     </li>
                     </li>
                     </li>

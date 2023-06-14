@@ -20,6 +20,9 @@ Build with Codeigniter 3.1.9 + AngularJs
 * run project on localhost/minipos
 * enjoy the awesome app!
 
+>> user manager: nadia, pass: dev123
+>> user admin/kasir: fahrudin, pass: dev123
+
 Developed by https://www.linkedin.com/in/fahrudin-mgl/
 
 
