@@ -99,6 +99,10 @@ class Jual_h extends CI_Controller
         } else {
             // $arr['updated_at'] = date("Y-m-d H:i:s");
             // $arr['updated_by'] = $this->session->userdata('username');
+            if ($d) {
+                $this->db->query("DELETE FROM jual_d WHERE id_penjualan = '" . $h->id . "'");
+                $this->saveD1($h->id, $d);
+            }
             $this->db->replace($this->m->table, $arr);
         }
         header('Content-Type: application/json');
